@@ -16,9 +16,7 @@ public class Validator {
     // if (agencia == null || agencia.length() != 4) { // I guess it says "only strings with length of 4 are allowed"
     // So for now I'll validate according to "Formato conta: 000000" but I need might change it in the future
 
-    // I should add more validations like check the strings in the first line (agencia;conta;saldo;status)
-    // Instead of just skipping it but for now I'll keep it simple
-
+    //TODO: add more validations like check the strings in the first line and define a character limit for "saldo"
     //TODO: implement constant for the errors messages
     //TODO: implement more sophisticated ways to do a validation using ValidatingItemProcessor or external libraries
     public Account validateAccount(Account account) {
