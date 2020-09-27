@@ -33,8 +33,8 @@ public class SincronizacaoReceitaApplication {
 
         // To make it fully automated I would upload it in a cloud platform (like AWS) and set up a Cron Job
 
-        if(timeNowInBrazil.compareTo(tenOClock) == 1)
-            logger.warn("Cuidado: o arquivo está sendo enviado depois das 10:00am! Horario atual em Brasília: "
+        if(timeNowInBrazil.compareTo(tenOClock) == 1) //TODO: minor fix, special characters not printing correctly on cmd (log4j 2 probably would help)
+            logger.warn("Cuidado: o arquivo está sendo enviado depois das 10:00am! Horário atual em Brasília: "
                     + timeNowInBrazil.truncatedTo(ChronoUnit.SECONDS));
 
         if (args.length == 0)
