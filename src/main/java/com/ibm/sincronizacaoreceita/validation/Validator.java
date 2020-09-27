@@ -8,7 +8,7 @@ public class Validator {
     // I could have throw an exception here but since this application outputs a column called "resultado"
     // I guess it's not what this IBM wants for this application
 
-    // Most of this logic already exists on ReceitaService but real external services might take some time send a response so I've made my own validation
+    // Most of this logic already exists on ReceitaService but a real external service might take some time send a response so I've made my own validation
     // If any data fails on my validation, ReceitaService will not be called increasing this app performance
 
     // On ReceitaService we have (same for accountNumber):
@@ -17,7 +17,7 @@ public class Validator {
     // So for now I'll validate according to "Formato conta: 000000" but I need might change it in the future
 
     // I should add more validations like check the strings in the first line (agencia;conta;saldo;status)
-    // instead of just skipping it but for now I'll keep it simple
+    // Instead of just skipping it but for now I'll keep it simple
 
     //TODO: implement constant for the errors messages
     //TODO: implement more sophisticated ways to do a validation using ValidatingItemProcessor or external libraries
@@ -28,17 +28,17 @@ public class Validator {
         final String balancePatter = "[-]?+[0-9]+[,]+[0-9]+"; // 00000000000,0000000000
 
         if (!account.getAgency().matches(fourDigits))
-            account.setResult("erro: agencia invalida"); // since input CSV file is in portuguese I'll return results in the same language
+            account.setResult("Erro: agencia invalida"); // since input CSV file is in portuguese I'll return results in the same language
 
         if (!account.getAccountNumber().matches(accountNumberPattern))
-            account.setResult("erro: conta invalida");
+            account.setResult("Erro: conta invalida");
 
         if (!List.of("A","I","B","P").contains(account.getStatus()))
-            account.setResult("erro: status invalido");
+            account.setResult("Erro: status invalido");
 
 
         if(!account.getBalance().matches(balancePatter))
-            account.setResult("erro: saldo invalido");
+            account.setResult("Erro: saldo invalido");
 
         return account;
 

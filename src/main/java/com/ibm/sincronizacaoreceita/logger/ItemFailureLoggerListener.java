@@ -11,7 +11,7 @@ import java.util.List;
 public class ItemFailureLoggerListener extends ItemListenerSupport {
     // TODO: Improve logger, maybe using log4j 2 as logging method
 
-    private static final Log logger = LogFactory.getLog("Exception");
+    private static final Log logger = LogFactory.getLog("Logger");
 
     @OnReadError
     public void onReadError(Exception ex) {

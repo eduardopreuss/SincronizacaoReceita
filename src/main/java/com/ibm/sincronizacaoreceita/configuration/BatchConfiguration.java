@@ -65,7 +65,7 @@ public class BatchConfiguration {
                         account.setStatus(fieldSet.readString("status"));
                         validator.validateAccount(account);
                     } catch (Exception ex) {
-                        account.setResult("erro: não foi possível ler alguma das colunas"); // TODO: extract from "ex" which column couldn't be read to set a specific error
+                        account.setResult("Erro: não foi possível ler alguma das colunas"); // TODO: extract from "ex" which column couldn't be read to set a specific error
                     }
                     return account;
                 })
@@ -133,7 +133,7 @@ public class BatchConfiguration {
                         account.setResult("Atualizado");
                     } else {
                         account.setResult("Erro");
-                        // Since I already made all those validations it's almost impossible to have this error but I added just in case
+                        // Since I already made all those validations beforehand it's really difficult to have this error but I added just in case
                     }
                 }
             } catch (Exception ex){
@@ -167,7 +167,7 @@ public class BatchConfiguration {
                 .writer(asyncItemWriter())
 //                .faultTolerant() // Enable retry
 //                .retryLimit(3) // I set maximum retry count of 3
-//                .retry(RuntimeException.class) // It will only retry for RuntimeException or InterruptedException and not others (these are the main exceptions that ReceitaService might throw)
+//                .retry(RuntimeException.class) // It will only retry for RuntimeException or InterruptedException and not others, these are the exceptions that ReceitaService might throw, I want to retry only when the error occurs in ReceitaService
 //                .retry(InterruptedException.class) // TODO: retry isn't fully working yet and is causing some warnings, I need to rework it, the library spring retry might help
 //                 it looks I can't use multiple threads and retry together https://stackoverflow.com/questions/23780587/spring-batch-reader-in-multi-threader-job
                 .taskExecutor(taskExecutor)

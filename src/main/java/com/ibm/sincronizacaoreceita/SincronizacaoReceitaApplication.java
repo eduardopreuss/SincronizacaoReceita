@@ -14,12 +14,12 @@ import java.time.temporal.ChronoUnit;
 @SpringBootApplication
 public class SincronizacaoReceitaApplication {
 
-    private static final Log logger = LogFactory.getLog("Exception");
+    private static final Log logger = LogFactory.getLog("Logger");
 
     public static void main(String[] args) throws FileInvalidOrNotFoundException {
 
-        // According with the business case CSV file is ideally sent before 10am GMT-3 (since Banco Central is in Brasília)
-        // If it's more them 10 o'clock I'll trigger a warning but I won't stop the application for two reasons
+        // According with the business case, the CSV file is ideally sent before 10am GMT-3 (since Banco Central is in Brasília)
+        // If it's more than 10 o'clock I'll trigger a warning but I won't stop the application for two reasons
         // 1) Not sure if I should stop it, it isn't precisely specified
         // 2) It's a sample application, I want it to be runnable at anytime
 
@@ -31,7 +31,7 @@ public class SincronizacaoReceitaApplication {
 
         // With this implementation I'm assuming the system's time is right
 
-        // to make it fully automated I would upload it in a cloud platform (like AWS) and set up a Cron Job
+        // To make it fully automated I would upload it in a cloud platform (like AWS) and set up a Cron Job
 
         if(timeNowInBrazil.compareTo(tenOClock) == 1)
             logger.warn("Cuidado: o arquivo está sendo enviado depois das 10:00am! Horario atual em Brasília: "
@@ -48,7 +48,7 @@ public class SincronizacaoReceitaApplication {
 
     // Some choices made for this application and why:
     // IBM is a multinational company, this code should be able to be maintained internationally so everything is in English
-    // CSV input file is in portuguese so I kept the same language for what will show up for the user (errors and results), that's the only language exception
+    // CSV input file is in portuguese so I kept the same language for what will show up for the user (errors and results), that's the only exception
     // Sicredi has over 4 millions accounts so I decided to implement scalable app with Spring Batch
     // I used multithreaded steps, async itemProcessor and async itemWriter as methods of scaling this application
     // Multithreaded steps: each chuck will have its own thread for better performance
